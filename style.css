@@ -31,20 +31,26 @@ button:hover{
 #cajaTexto{
 	margin: 0 auto;
 	text-align: center;
+	background: #ddd;
+	height: 300px;
+	border-bottom: solid 6px #8bbd9e;  
 }
 
 textarea{
+	padding: 5px;
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	font-weight: 200;
 	font-size: 18px;
-	width: 98%;
-	margin-top: 5px;
+	width: 97%;
+	margin-top: 10px;
 	border-radius: 3px;
 	border:solid 1px #bbb;
+	min-height: 250px;
 }
 
 h2{
 	font-weight: 300;
+	color:white;
 }
 
 nav{
@@ -74,4 +80,36 @@ input[type="text"]{
 	font-size: 20px;
 	display: inline-block;
 	margin-left: 1em;
+}
+
+#detalles{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#detalles article{
+	width: 31%;
+	display: inline-block;
+	vertical-align: top; 
+	margin-left: 3px;
+	margin-right: 3px;
+	border-radius: 0 0 4px 4px; 
+	min-height: 150px;
+	background: #6294c6;
+}
+
+#detalles article .titulo{
+	font-weight: 400;
+	color: #eee;
+	margin-right: 4px;
+}
+#detalles article .detalle{
+	font-weight: 300;
+	color: #eee;
+}
+
+#detalles article .detalle,
+#detalles article .titulo{
+	display: inline-block;
+	margin-bottom: 5px;
 }
