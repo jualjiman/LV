@@ -1,139 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
 <title>Distancia de Levenshtein</title>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript">
- <!-- 
- function Levenshtein(a, b) {
-			var n = a.length;
-			var m = b.length;
-
-			// matriz de cambios mínimos
-			var d = [];
-
-			// si una de las dos está vacía, la distancia es insertar todas las otras
-			if(n == 0)
-				return m;
-			if(m == 0)
-				return n;
-
-			// inicializamos el peor caso (insertar todas)
-			for(var i = 0; i <= n; i++)
-				(d[i] = [])[0] = i;
-			for(var j = 0; j <= m; j++)
-				d[0][j] = j;
-
-			// cada elemento de la matriz será la transición con menor coste
-			for(var i = 1, I = 0; i <= n; i++, I++)
-			  for(var j = 1, J = 0; j <= m; j++, J++)
-			  	if(b[J] == a[I])	d[i][j] = d[I][J];
-			  	else				d[i][j] = Math.min(d[I][j], d[i][J], d[I][J]) + 1;
-
-			// el menor número de operaciones
-			return d[n][m];
-		}
-
- 
- 
-function findWord(A) {
-	var texts = [];
-	var shortest = -1;
-	var matchlev = null;
-	var sm = " ";
-	var i = 0;
-	var count = 0;
-	
-		var long =jQuery('#my_textarea').val().length;
-		var cadt = jQuery('#my_textarea').val();
-		
-		// take the position of the word in the text
-		
-		
-		 $.each(cadt.split(/ /), function (i, name) {     
-            // empty string check
-            if(name != ""){
-              texts.push(name);
-             }        
-			//   alert(JSON.stringify(texts));
-          });
-		  
-			 for (var i=0; i <= texts.length-1; i++) {
-			    console.log(texts[i]);
-				var lev = Levenshtein(texts[i], A);			
-				  
-					 if (lev ==0 ) {
-						 matchlev = A;
-						 shortest = 0;
-						 count ++;
-						 alert('Patron encontrado con exito:' + count);
-						 var posi = jQuery('#my_textarea').val().lastIndexOf(A);
-							if (posi != -1) {
-								var target = document.getElementById("my_textarea");
-								//var l = target.value.length;
-								// seleziono la parola
-								target.focus();
-								
-									if (target.setSelectionRange)
-										target.setSelectionRange(posi, posi+A.length);
-										
-									else {
-										var r = target.createTextRange();
-										r.collapse(true);
-										r.moveEnd('character',  posi+A);
-										r.moveStart('character', posi);
-										r.select();   
-									  } 
-								
-								var objDiv = document.getElementById("my_textarea");
-								var sh = objDiv.scrollHeight; //height in pixel of the textarea
-								var line_ht = jQuery('#my_textarea').css('line-height').replace('px',''); //height in pixel of each row
-								var n_lines = sh/line_ht; // total amount of lines in the textarea
-								var char_in_line = jQuery('#my_textarea').val().length / n_lines; // the total amount of chars in each row
-								var height = Math.floor(posi/char_in_line); // height in number of rows of the searched word
-								jQuery('#my_textarea').scrollTop(height*line_ht); // scroll to the selected line containing the word
-								//break; 
-							} 					 
-						 
-						
-					 }
-					    if (lev <= shortest || shortest < 0) {
-							 
-						      matchlev = A;
-						      shortest = lev;
-							  sm = texts[i];
-							  //de aqui
-							  var posi = jQuery('#my_textarea').val().lastIndexOf(A);
-							  
-								
-							  console.log(texts[i], matchlev, shortest);
-							 // alert ("Existe una aproximaciòn del patron" + texts[i]);
-					     } 
-					       
-						 
-					 
-			} 
-                 
-				   if (shortest == 0) {
-					    alert("Patrón Exacto Encontrado : " + matchlev);
-					} else {
-						alert("Usted Quesi Decir : "+ matchlev +" y la cadena más aproximada es dentro del texto es:  "+sm);
-					}
-		 
-}
-//--></script></p>
-
-	
+<script src="funciones.js"></script>
+<link rel="stylesheet" href="style.css"/>
+<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,300,200' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 
-   <div>
-   <input id="findWord" type="text" value="highlight"/><a onclick="javascript:findWord(jQuery('#findWord').val())" href="javascript:;">Find</a></div>
-   <textarea id="my_textarea" style="line-height: 15px;" rows="3" cols="40">No es verdad, ángel de amor, que en esta apartada orilla más pura la luna brilla y se respira mejor se
-   </textarea>
+   <nav>
+   		<div class="titulob">Patron a buscar:</div>
+   		<input id="findWord" type="text" placeholder="¿Que palabra busca?"/>
+   		<button onclick="findWord();">Encontrar</button>
+   		<button onclick="nuevo();">Nuevo</button>
+   </nav>
+   <section id="cajaTexto">
+	   <textarea id="my_textarea" style="line-height: 15px;" rows="3" cols="40">No es verdad, ángel de amor, que en esta apartada orilla más pura la luna brilla y se respira mejor</textarea>
+   </section>
+   <section>
+   		<article class="detalles">
+   			<h2>PATRON A ENCONTRAR</h2>
+   			<div class="detalle">Patron</div>
+   		</article>
+   		<article class="detalles">
+   			<h2>OCURRENCIAS</h2>
+   			<div class="titulo">Cantidad:</div><div class="detalle">2</div>
+   			<div class="titulo">Posición:</div><div class="detalle">10,5</div>
+   		</article>
+   		<article class="detalles">
+   			<h2>APROXIMACIONES</h2>
+   			<div class="titulo">Cantidad:</div><div class="detalle">2</div>
+   			<div class="titulo">Patron:</div><div class="detalle">Lobo</div>
+   		</article>
+   </section>
 
 
 </body>
