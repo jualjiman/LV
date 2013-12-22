@@ -1,3 +1,7 @@
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 function Levenshtein(a, b) {
 	var n = a.length;
 	var m = b.length;
@@ -29,7 +33,94 @@ function Levenshtein(a, b) {
 	return d[n][m];
 }
 
+function cambiarProcesado(){
+	//$("#cajaTexto").slideUp("fast");
+	//$("#cajaTexto textarea").css("display","none");
+	//$("#cajaTexto #procesado").css("display","inline-block");
+	//$("#cajaTexto #procesado").text("Panel no escribible");
+	//$("#cajaTexto").slideDown();
+	$("#cajaTexto textarea").hide();
+	$("#cajaTexto #procesado").css("display","inline-block");
+	$("#cajaTexto #procesado").hide().fadeIn();
+}
+
+function cambiarNuevo(){
+	$("#cajaTexto #procesado").hide();
+	$("#cajaTexto textarea").hide().fadeIn();
+}
  
+function Encontrar() {
+	var shortest = -1;
+	var matchlev = null;
+	var sm = " ";
+	var i = 0;
+	var count = 0;
+		
+	var pista = $('#findWord').val();
+	var texto = $('#my_textarea').val();
+	var salida = "";
+	var coin = 0;//coincidencias
+	var aprox = 0;//aproximaciones
+	var saprox = "";
+	var comit = ""; //caracter omitido
+	var palabra = "";//palabra actual
+	// take the position of the word in the text
+	
+	var palabras = texto.split(" ");
+	for (var i=0; i <= palabras.length-1; i++) {
+		comit = "";
+		palabra = "";
+
+		var temp = palabras[i];//necesito quitarle antes puntos y comas
+
+		if(temp.endsWith(",") || temp.endsWith(".")){
+			palabra = temp.substring(0,temp.length-1);
+			comit = temp.substring(temp.length-1);
+		}
+		else
+			palabra = temp;
+
+		var lev = Levenshtein(palabra, pista);			
+
+		if (lev ==0 ){
+			matchlev = pista;
+			shortest = 0;
+			coin++;
+			salida+="<div class='coincidencia'>" + palabra + "</div>" + comit + " ";
+		}
+		else
+			salida+=palabra + comit + " ";
+
+		if (lev <= shortest || shortest < 0) {
+			matchlev = pista;
+			shortest = lev;
+			sm = palabra;
+		}
+
+		/*if (shortest == 0) {
+			
+		}
+		else{
+				//alert("Usted Quesi Decir : "+ matchlev +" y la cadena más aproximada es dentro del texto es:  "+sm);
+				saprox+=sm+",";
+				aprox++;
+		}*/
+		if (shortest == 0) {
+		    //alert("Patrón Exacto Encontrado : " + matchlev);
+		    $("#aproximacion").text("patron exacto encontrado");
+		} 
+		else{
+			//alert("Usted Quesi Decir : "+ matchlev +" y la cadena más aproximada es dentro del texto es:  "+sm);
+			$("#aproximacion").text('Quizo decir "' + sm + '"?');
+		} 
+	}
+	//$("#aproximacion").text(saprox);
+	$("#cajaTexto #procesado").html(salida);
+	$("#patron").text('"' + pista + '"');
+	$("#cantidad").text(coin);
+
+	cambiarProcesado();
+}
  
 function findWord() {
 	var texts = [];
@@ -114,4 +205,5 @@ function findWord() {
 function nuevo(){
 	$("#findWord").val("");
 	$("#findWord").focus();
+	cambiarNuevo();
 }

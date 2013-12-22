@@ -29,14 +29,19 @@ button:hover{
 }
 
 #cajaTexto{
-	margin: 0 auto;
 	text-align: center;
 	background: #ddd;
-	height: 300px;
 	border-bottom: solid 6px #8bbd9e;  
+	padding-bottom: 10px;
 }
 
-textarea{
+.coincidencia{
+	color:red;
+	display: inline;
+	font-weight: bold;
+}
+
+#cajaTexto textarea{
 	padding: 5px;
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	font-weight: 200;
@@ -45,7 +50,27 @@ textarea{
 	margin-top: 10px;
 	border-radius: 3px;
 	border:solid 1px #bbb;
-	min-height: 250px;
+	min-height: 200px;
+	color: #111;
+	resize:none;
+	border-bottom: solid 3px blue;
+}
+
+#cajaTexto #procesado{
+	display: none;
+	padding: 3px;
+	text-align: left;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-weight: 200;
+	font-size: 18px;
+	width: 97%;
+	margin-top: 10px;
+	border-radius: 3px;
+	border:solid 1px #bbb;
+	height: 206px;
+	background: white;
+	color: #111;
+	border-bottom: solid 3px green;
 }
 
 h2{
@@ -101,10 +126,12 @@ input[type="text"]{
 	font-weight: 400;
 	color: #eee;
 	margin-right: 4px;
+	font-size: 20px;
 }
 #detalles article .detalle{
 	font-weight: 300;
 	color: #eee;
+	font-size: 20px;
 }
 
 #detalles article .detalle,
