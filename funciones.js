@@ -34,11 +34,6 @@ function Levenshtein(a, b) {
 }
 
 function cambiarProcesado(){
-	//$("#cajaTexto").slideUp("fast");
-	//$("#cajaTexto textarea").css("display","none");
-	//$("#cajaTexto #procesado").css("display","inline-block");
-	//$("#cajaTexto #procesado").text("Panel no escribible");
-	//$("#cajaTexto").slideDown();
 	$("#cajaTexto textarea").hide();
 	$("#cajaTexto #procesado").css("display","inline-block");
 	$("#cajaTexto #procesado").hide().fadeIn();
@@ -48,78 +43,78 @@ function cambiarNuevo(){
 	$("#cajaTexto #procesado").hide();
 	$("#cajaTexto textarea").hide().fadeIn();
 }
+
+function EncontrarOnKeyUp(evt){//cargar al dar enter en el buscador
+    var e = window.event || evt; // for trans-browser compatibility
+    var tecla = e.which || e.keyCode;
+  if(tecla == 13){Encontrar();}
+}
  
 function Encontrar() {
-	var shortest = -1;
-	var matchlev = null;
-	var sm = " ";
-	var i = 0;
-	var count = 0;
-		
-	var pista = $('#findWord').val();
-	var texto = $('#my_textarea').val();
-	var salida = "";
-	var coin = 0;//coincidencias
-	var aprox = 0;//aproximaciones
-	var saprox = "";
-	var comit = ""; //caracter omitido
-	var palabra = "";//palabra actual
-	// take the position of the word in the text
-	
-	var palabras = texto.split(" ");
-	for (var i=0; i <= palabras.length-1; i++) {
-		comit = "";
-		palabra = "";
 
-		var temp = palabras[i];//necesito quitarle antes puntos y comas
+	if($('#findWord').val().length > 0){
 
-		if(temp.endsWith(",") || temp.endsWith(".")){
-			palabra = temp.substring(0,temp.length-1);
-			comit = temp.substring(temp.length-1);
-		}
-		else
-			palabra = temp;
-
-		var lev = Levenshtein(palabra, pista);			
-
-		if (lev ==0 ){
-			matchlev = pista;
-			shortest = 0;
-			coin++;
-			salida+="<div class='coincidencia'>" + palabra + "</div>" + comit + " ";
-		}
-		else
-			salida+=palabra + comit + " ";
-
-		if (lev <= shortest || shortest < 0) {
-			matchlev = pista;
-			shortest = lev;
-			sm = palabra;
-		}
-
-		/*if (shortest == 0) {
+		var shortest = -1;
+		var matchlev = null;
+		var sm = " ";
+		var i = 0;
+		var count = 0;
 			
-		}
-		else{
-				//alert("Usted Quesi Decir : "+ matchlev +" y la cadena más aproximada es dentro del texto es:  "+sm);
-				saprox+=sm+",";
-				aprox++;
-		}*/
-		if (shortest == 0) {
-		    //alert("Patrón Exacto Encontrado : " + matchlev);
-		    $("#aproximacion").text("patron exacto encontrado");
-		} 
-		else{
-			//alert("Usted Quesi Decir : "+ matchlev +" y la cadena más aproximada es dentro del texto es:  "+sm);
-			$("#aproximacion").text('Quizo decir "' + sm + '"?');
-		} 
-	}
-	//$("#aproximacion").text(saprox);
-	$("#cajaTexto #procesado").html(salida);
-	$("#patron").text('"' + pista + '"');
-	$("#cantidad").text(coin);
+		var pista = $('#findWord').val();
+		var texto = $('#my_textarea').val();
+		var salida = "";
+		var coin = 0;//coincidencias
+		var aprox = 0;//aproximaciones
+		var saprox = "";
+		var comit = ""; //caracter omitido
+		var palabra = "";//palabra actual
+		
+		var palabras = texto.split(" ");
+		for (var i=0; i <= palabras.length-1; i++) {
+			comit = "";
+			palabra = "";
 
-	cambiarProcesado();
+			var temp = palabras[i];//necesito quitarle antes puntos y comas
+
+			if(temp.endsWith(",") || temp.endsWith(".")){
+				palabra = temp.substring(0,temp.length-1);
+				comit = temp.substring(temp.length-1);
+			}
+			else
+				palabra = temp;
+
+			var lev = Levenshtein(palabra, pista);			
+
+			if(lev ==0 ){
+				matchlev = pista;
+				shortest = 0;
+				coin++;
+				salida+="<div class='coincidencia'>" + palabra + "</div>" + comit + " ";
+			}
+			else
+				salida+=palabra + comit + " ";
+
+			if (lev <= shortest || shortest < 0) {
+				matchlev = pista;
+				shortest = lev;
+				sm = palabra;
+			}
+
+			if(shortest == 0)
+			    $("#aproximacion").text("patron exacto encontrado");
+			else
+				$("#aproximacion").text('Quizo decir "' + sm + '"?');
+		}
+
+		$("#cajaTexto #procesado").html(salida);
+		$("#patron").text('"' + pista + '"');
+		$("#cantidad").text(coin);
+
+		cambiarProcesado();
+	}
+	else{
+		$('#findWord').focus();
+	}
 }
  
 function findWord() {

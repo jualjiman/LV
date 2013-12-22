@@ -14,16 +14,13 @@
 
    <nav>
    		<div class="titulob">Patron a buscar:</div>
-   		<input id="findWord" type="text" placeholder="¿Que palabra busca?"/>
+   		<input id="findWord" type="text" placeholder="¿Que palabra busca?" onkeyup="EncontrarOnKeyUp();" />
    		<button onclick="Encontrar();">Encontrar</button>
    		<button onclick="nuevo();">Nuevo</button>
    </nav>
 
    <section id="cajaTexto">
-	   <textarea id="my_textarea" placeholder="Aqui va el texto entre el que se va a hacer la busqueda">Nevada es uno de los 50 estados de los Estados Unidos, localizado en el oeste del país. Su capital es Carson City, aunque su mayor ciudad es Las Vegas. Es conocida por sus casinos y por la legalización del juego.
-Nevada posee las mayores tasas de crecimiento demográfico de todo Estados Unidos, en gran medida gracias a la gran inmigración de mexicanos. El crecimiento demográfico del estado entre 1990 y 2000 fue enorme, del 66,3%. No obstante, la mayor parte de Nevada está casi despoblada. La mayoría de la población del estado se concentra en los núcleos urbanos de Las Vegas, Carson City y Reno.
-Los primeros exploradores europeos en explorar la zona de Nevada fueron los españoles. Éstos fueron los que le dieron el nombre de Nevada, a causa de la nieve que cubría los montes en invierno. Nevada fue parte del Virreinato de Nueva España hasta 1821, fecha de la independencia de México, pasando a formar parte de México. En 1848, con el final de la Intervención estadounidense en México, Nevada pasa a formar parte de Estados Unidos. El 31 de octubre de 1864, fue elevada a la categoría de estado de Estados Unidos, en plena Guerra de Secesión. Ello le ha valido el apodo de The Battle-Born State (el estado nacido en la batalla).
-Durante la década de 1870 se encontraron en Nevada grandes yacimientos de plata, lo que le valió el apodo de The Silver State. Actualmente, la minería aún posee cierta importancia en la economía de Nevada, aunque mucho menos que antaño. Además de plata, es un gran productor de oro, petróleo y arena. Sin embargo, en la actualidad la mayor fuente de ingresos es el turismo. Nevada es famosa por sus casinos, que se concentran en Las Vegas y en Reno.</textarea>
+	   <textarea id="my_textarea" placeholder="Aqui va el texto entre el que se va a hacer la busqueda">Nevada es uno de los 50 estados de los Estados Unidos, localizado en el oeste del país. Su capital es Carson City, aunque su mayor ciudad es Las Vegas. Es conocida por sus casinos y por la legalización del juego. Nevada posee las mayores tasas de crecimiento demográfico de todo Estados Unidos, en gran medida gracias a la gran inmigración de mexicanos. El crecimiento demográfico del estado entre 1990 y 2000 fue enorme, del 66,3%. No obstante, la mayor parte de Nevada está casi despoblada. La mayoría de la población del estado se concentra en los núcleos urbanos de Las Vegas, Carson City y Reno.Los primeros exploradores europeos en explorar la zona de Nevada fueron los españoles. Éstos fueron los que le dieron el nombre de Nevada, a causa de la nieve que cubría los montes en invierno. Nevada fue parte del Virreinato de Nueva España hasta 1821, fecha de la independencia de México, pasando a formar parte de México. En 1848, con el final de la Intervención estadounidense en México, Nevada pasa a formar parte de Estados Unidos. El 31 de octubre de 1864, fue elevada a la categoría de estado de Estados Unidos, en plena Guerra de Secesión. Ello le ha valido el apodo de The Battle-Born State (el estado nacido en la batalla).Durante la década de 1870 se encontraron en Nevada grandes yacimientos de plata, lo que le valió el apodo de The Silver State. Actualmente, la minería aún posee cierta importancia en la economía de Nevada, aunque mucho menos que antaño. Además de plata, es un gran productor de oro, petróleo y arena. Sin embargo, en la actualidad la mayor fuente de ingresos es el turismo. Nevada es famosa por sus casinos, que se concentran en Las Vegas y en Reno.</textarea>
 	   	<article id="procesado">
    			No es verdad, ángel de amor, que en esta apartada orilla más pura la luna brilla y se respira mejor
    		</article>
@@ -44,7 +41,7 @@ Durante la década de 1870 se encontraron en Nevada grandes yacimientos de plata
    		</article>
    </section>
 	<footer>
-		Algoritmo de Levenshtein - Irving Jaime Santiago Linares
+		Algoritmo de Levenshtein - Ing. Irving Jaime Santiago Linares
 	</footer>
 
 </body>
