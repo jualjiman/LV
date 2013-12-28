@@ -1,4 +1,4 @@
-String.prototype.endsWith = function(suffix) {
+String.prototype.endsWith = function(suffix) {/*aqui estoy modificando el prototipo String, y le estoy agregando a todo objeto String la funcion endsWith*/
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
@@ -34,17 +34,17 @@ function Levenshtein(a, b) {
 }
 
 function cambiarProcesado(){
-	$("#cajaTexto textarea").hide();
-	$("#cajaTexto #procesado").css("display","inline-block");
-	$("#cajaTexto #procesado").hide().fadeIn();
+	$("#cajaTexto textarea").hide();/*desaparesco el textarea*/
+	$("#cajaTexto #procesado").css("display","inline-block");/*le digo que el display de procesando ya no sea none ahora sea inline-block*/
+	$("#cajaTexto #procesado").hide().fadeIn();/*aparesco el contenedor de texto procesado, el article*/
 }
 
 function cambiarNuevo(){
-	$("#cajaTexto #procesado").hide();
-	$("#cajaTexto textarea").hide().fadeIn();
+	$("#cajaTexto #procesado").hide();/*desaparesco el article con id procesado*/
+	$("#cajaTexto textarea").hide().fadeIn();/*aparesco el text area*/
 }
 
-function EncontrarOnKeyUp(evt){//cargar al dar enter en el buscador
+function EncontrarOnKeyUp(evt){//cargar al dar enter en el campo de texto de la pista
     var e = window.event || evt; // for trans-browser compatibility
     var tecla = e.which || e.keyCode;
   if(tecla == 13){Encontrar();}
@@ -52,7 +52,7 @@ function EncontrarOnKeyUp(evt){//cargar al dar enter en el buscador
  
 function Encontrar() {
 
-	if($('#findWord').val().length > 0){
+	if($('#findWord').val().length > 0){//si el campo de pista no esta vacio
 
 		var shortest = -1;
 		var matchlev = null;
@@ -60,145 +60,67 @@ function Encontrar() {
 		var i = 0;
 		var count = 0;
 			
-		var pista = $('#findWord').val();
-		var texto = $('#my_textarea').val();
-		var salida = "";
+		var pista = $('#findWord').val();//obtengo la pista
+		var texto = $('#my_textarea').val();//obtengo el texto en el textarea
+		var salida = "";//aqui voy a poner el texto que luego colocare en el article
 		var coin = 0;//coincidencias
 		var aprox = 0;//aproximaciones
 		var saprox = "";
 		var comit = ""; //caracter omitido
 		var palabra = "";//palabra actual
 		
-		var palabras = texto.split(" ");
-		for (var i=0; i <= palabras.length-1; i++) {
-			comit = "";
-			palabra = "";
+		var palabras = texto.split(" ");//convierto el texto del textarea en un arreglo de palabras que por cierto son String, y por esa razon todos tienen ya la funcion endsWith
+		for (var i=0; i <= palabras.length-1; i++) {//hago un recorrido del arreglo de palabras
+			comit = "";//caracter omitido
+			palabra = "";//palabra actual
 
 			var temp = palabras[i];//necesito quitarle antes puntos y comas
 
-			if(temp.endsWith(",") || temp.endsWith(".")){
-				palabra = temp.substring(0,temp.length-1);
-				comit = temp.substring(temp.length-1);
+			if(temp.endsWith(",") || temp.endsWith(".")){//si la palabra temporal acaba en punto o coma, hay que quitarsela para procesar la palabra
+				palabra = temp.substring(0,temp.length-1);//obtengo la palabra
+				comit = temp.substring(temp.length-1);//extraigo y deposito aqui el caracter sobrante
 			}
 			else
-				palabra = temp;
+				palabra = temp;//si no hay nada que le sobre a la palabra simplemente la deposito en la variable de palabra actual
 
-			var lev = Levenshtein(palabra, pista);			
+			var lev = Levenshtein(palabra, pista);//utilizo el algoritmo
 
-			if(lev ==0 ){
-				matchlev = pista;
-				shortest = 0;
-				coin++;
-				salida+="<div class='coincidencia'>" + palabra + "</div>" + comit + " ";
+			if(lev ==0 ){//si la distancia es 0
+				matchlev = pista;//martchlev es igual a pista
+				shortest = 0;//pongo esta bandera en 0
+				coin++;//le digo que hay una coincidencia mas
+				salida+="<div class='coincidencia'>" + palabra + "</div>" + comit + " ";//y pongo en rojo la palabra antes de agregarla a la cadena de salida, y si existe algun caracter omitido que haya extraido lo concateno
 			}
 			else
-				salida+=palabra + comit + " ";
+				salida+=palabra + comit + " ";//si la distancia es diferente de 0, simplemente concateno la palabra sin estilo y concatenando el caracter omitido
 
-			if (lev <= shortest || shortest < 0) {
+			if (lev <= shortest || shortest < 0) {//bueno esto lo deje igual
 				matchlev = pista;
 				shortest = lev;
 				sm = palabra;
 			}
 
-			if(shortest == 0)
+			if(shortest == 0)//si encontre la palabra exacta le digo que encontre el patron exacto
 			    $("#aproximacion").text("patron exacto encontrado");
-			else
+			else//sino le digo cual fue la que mas se parece
 				$("#aproximacion").text('Quizo decir "' + sm + '"?');
 		}
 
-		$("#cajaTexto #procesado").html(salida);
-		$("#patron").text('"' + pista + '"');
-		$("#cantidad").text(coin);
+		$("#cajaTexto #procesado").html(salida);//para casi finalizar pongo todo el texto de salida con todo y los estilos, dentro de article procesado
+		$("#patron").text('"' + pista + '"');//pongo en el area de informacion que el patron es la pista
+		$("#cantidad").text(coin);//le digo cuantas veces coincidio la palabra...fijese que en la primera linea uso html, en las otras dos text
+		//la diferencia es que html respeta el significado de las tags de html y el text lo agarra como si fuera texto simplemente
+		//en la primera ocupo las tags, asi que conviene usar html
 
-		cambiarProcesado();
+		cambiarProcesado();//desaparesco el text area y aparesco el article con todo y el contenido que acabo de hacer
 	}
-	else{
-		$('#findWord').focus();
+	else{//si no habia nada en el cambio de pista
+		$('#findWord').focus();//mando el foco a el campo de pista
 	}
 }
- 
-function findWord() {
-	var texts = [];
-	var shortest = -1;
-	var matchlev = null;
-	var sm = " ";
-	var i = 0;
-	var count = 0;
-		
-		var A = $('#findWord').val();
-		var long =jQuery('#my_textarea').val().length;
-		var cadt = jQuery('#my_textarea').val();
-		
-		// take the position of the word in the text
-		
-		
-		 $.each(cadt.split(/ /), function (i, name) {     
-            // empty string check
-            if(name != ""){
-              texts.push(name);
-             }        
-			//   alert(JSON.stringify(texts));
-          });
-		  
-		for (var i=0; i <= texts.length-1; i++) {
-			console.log(texts[i]);
-			var lev = Levenshtein(texts[i], A);			
-				  
-			if (lev ==0 ) {
-				matchlev = A;
-				shortest = 0;
-				count ++;
-				alert('Patron encontrado con exito:' + count);
-				var posi = jQuery('#my_textarea').val().lastIndexOf(A);
-				if (posi != -1) {
-					var target = document.getElementById("my_textarea");
-					//var l = target.value.length;
-					// seleziono la parola
-					target.focus();
-								
-					if (target.setSelectionRange)
-						target.setSelectionRange(posi, posi+A.length);						
-					else {
-						var r = target.createTextRange();
-						r.collapse(true);
-						r.moveEnd('character',  posi+A);
-						r.moveStart('character', posi);
-						r.select();   
-					} 
-								
-					var objDiv = document.getElementById("my_textarea");
-					var sh = objDiv.scrollHeight; //height in pixel of the textarea
-					var line_ht = jQuery('#my_textarea').css('line-height').replace('px',''); //height in pixel of each row
-					var n_lines = sh/line_ht; // total amount of lines in the textarea
-					var char_in_line = jQuery('#my_textarea').val().length / n_lines; // the total amount of chars in each row
-					var height = Math.floor(posi/char_in_line); // height in number of rows of the searched word
-					$('#my_textarea').scrollTop(height*line_ht); // scroll to the selected line containing the word
-					//break; 
-				} 					 
-						 
-						
-			}
-			if (lev <= shortest || shortest < 0) {				 
-			    matchlev = A;
-			    shortest = lev;
-				sm = texts[i];
-				//de aqui
-				var posi = jQuery('#my_textarea').val().lastIndexOf(A);
-				
-				console.log(texts[i], matchlev, shortest);
-				// alert ("Existe una aproximaciòn del patron" + texts[i]);
-		    } 			 
-		} 
-                 
-		if (shortest == 0) {
-		    alert("Patrón Exacto Encontrado : " + matchlev);
-		} else {
-			alert("Usted Quesi Decir : "+ matchlev +" y la cadena más aproximada es dentro del texto es:  "+sm);
-		} 
-}
 
-function nuevo(){
+function nuevo(){//este metodo es simplemente para borrar el contenido de el campo findword (en el que se pone la pista)
 	$("#findWord").val("");
-	$("#findWord").focus();
-	cambiarNuevo();
+	$("#findWord").focus();//pongo el foco en el campo de la pista
+	cambiarNuevo();//y desaparesco el article con el texto procesado, para aparecer el textarea
 }
