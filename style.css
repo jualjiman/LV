@@ -1,91 +1,91 @@
 body{
-	background: #eeeeee;
-	margin: 0 auto;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	color: #494949;
+	background: #eeeeee;/*color de fondo*/
+	margin: 0 auto;/*centrar todo y quitar margenes*/
+	font-family: 'Yanone Kaffeesatz', sans-serif;/*aqui aplico la fuente que me traje de google fonts*/
+	color: #494949;/*color de texto con hexadecimal*/
 }
 
 button{
-	min-width: 120px;
-	height: 100%;
-	font-size: 20px;
-	text-transform: uppercase;
-	color: white;
-	margin-left: 0.5em;
-	border-radius: 2px;
-	border: solid 1px #8bbd9e;
-	background: #8bbd9e;
-	cursor: pointer;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	font-weight: 200;
+	min-width: 120px;/*anchura minima*/
+	height: 100%;/*altura*/
+	font-size: 20px;/*tamaño de fuente*/
+	text-transform: uppercase;/*transformacion del texto a mayusculas*/
+	color: white;/*color de texto con atajo de color, no todos los colores se reconocen, la alternativa es usar hexadecimal o rgb(r,b,g,a)*/
+	margin-left: 0.5em;/*margen izquierdo, em es una medida relativa, indica los pixeles de la letra "M" de la fuente del contenedor, en este caso button, el tamaño de fuente es de 20px por lo tanto 0.5em son 10px*/
+	border-radius: 2px;/*redondear margenes del boton tomando en cuenta circulos de 2px de radio*/
+	border: solid 1px #8bbd9e;/*cambio el color de los bordes a un color solido de 1px*/
+	background: #8bbd9e;/*color de fondo*/
+	cursor: pointer;/*cambio el tipo de cursor que se usara cuando se señalice el boton*/
+	font-family: 'Yanone Kaffeesatz', sans-serif;/*fuente de google*/
+	font-weight: 200;/*indico que tan negrita va a ser la fuente*/
 }
 
-button:hover{
+button:hover{/*evento que ocurre cuando se coloca el cursor ensima del boton*/
 	background: #2dbd63;
 	border: solid 1px #2dbd63;
 	color: white;
-	transition: all 0.5s linear;
+	transition: all 0.5s linear;/*transformar todo en medio segundo, de forma lineal, hace una tranformacion desde estas configuraciones, hacia la configuracion de arriba cuando no esta hover*/
 	-web-transition: all 0.5s linear;
 }
 
 #cajaTexto{
-	text-align: center;
-	background: #ddd;
-	border-bottom: solid 6px #8bbd9e;  
-	padding-bottom: 10px;
+	text-align: center;/*alineame el control caja de texto*/
+	background: #ddd;/*ponle tal color de fondo*/
+	border-bottom: solid 6px #8bbd9e;  /*ponle un borde de 6px solido en tal color*/
+	padding-bottom: 10px;/*dale un margen interior de abajo de 10px*/
 }
 
-.coincidencia{
-	color:red;
-	display: inline;
-	font-weight: bold;
+.coincidencia{/*estilo que se aplica a las palabras que coincidieron*/
+	color:red;/*ponmelas en color rojo*/
+	display: inline;/*ponme las palabras en linea...si no ubiera puesto esto, todas las palabras en rojo ubieran sido cajas(block) y se ubieran visto hacia abajo como lista*/
+	font-weight: bold;/*ponmelas en negrita*/
 }
 
-#cajaTexto textarea{
-	padding: 5px;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	font-weight: 200;
-	font-size: 18px;
-	width: 97%;
-	margin-top: 10px;
-	border-radius: 3px;
-	border:solid 1px #bbb;
-	min-height: 200px;
-	color: #111;
-	resize:none;
-	border-bottom: solid 3px blue;
+#cajaTexto textarea{/*configuraciones para el textarea que esta dentro del section cajaTexto*/
+	padding: 5px;/*margenes interiores de 5 pixeles, TODOS*/
+	font-family: 'Yanone Kaffeesatz', sans-serif;/*fuente de google*/
+	font-weight: 200;/*peso de la fuente de 200, que tan negrita se va a ver*/
+	font-size: 18px;/*fuente de 18px*/
+	width: 97%;/*habarcame 97% de la ventana no importa cuanto mida, por eso se ve responsive*/
+	margin-top: 10px;/*quiero un margen exterior de arriba de 10px*/
+	border-radius: 3px;/*redondeado del textarea con una circunferencia de 3px de radio*/
+	border:solid 1px #bbb;/*ponle un borde solido de 1px en tal color*/
+	min-height: 200px;/*dale un ancho minimo de 200px*/
+	color: #111;/*tal color de fuente*/
+	resize:none;/*no dejes que el textarea se redimencione*/
+	border-bottom: solid 3px blue;/* ponle un borde inferior solido de 3px en color azul (esto es nadamas para identificar que es el textarea)*/
 }
 
-#cajaTexto #procesado{
-	display: none;
-	padding: 3px;
-	text-align: left;
-	font-family: 'Yanone Kaffeesatz', sans-serif;
-	font-weight: 200;
-	font-size: 18px;
-	width: 97%;
-	margin-top: 10px;
-	border-radius: 3px;
-	border:solid 1px #bbb;
-	height: 206px;
-	background: white;
-	color: #111;
-	border-bottom: solid 3px green;
+#cajaTexto #procesado{/*aqui va el texto una ves que se proceso y se le aplico el estilo en rojo a las palabras que coincidieron*/
+	display: none;/*por defecto al principio no lo muestres, por eso no se ve*/
+	padding: 3px;/*dale un margen interior de 3px*/
+	text-align: left;/*alineame todo el texto a la izquierda*/
+	font-family: 'Yanone Kaffeesatz', sans-serif;/*usa la fuente de google*/
+	font-weight: 200;/*peso de la fuente a 200, negrita a 200*/
+	font-size: 18px;/*tamaño de fuente de 18px*/
+	width: 97%;/*habarcame 97% de la ventana no importa cuanto mida, por eso se ve responsive*/
+	margin-top: 10px;/*quiero un margen exterior de arriba de 10px*/
+	border-radius: 3px;/*redondeado del textarea con una circunferencia de 3px de radio*/
+	border:solid 1px #bbb;/*ponle un borde solido de 1px en tal color*/
+	height: 206px;/*alto de exactamente 206px*/
+	background: white;/*fondo blanco, para que se vea igual que el textarea*/
+	color: #111;/*fuente de tal color*/
+	border-bottom: solid 3px green;/*borde de abajo solido de 3px de color verde*/
 }
 
-h2{
+h2{/*redefiniendo el aspecto del h2*/
 	font-weight: 300;
 	color:white;
 }
 
-nav{
-	background: #387ec5;
-	width: 100%;
-	padding-top: 5px;
-	padding-bottom: 5px;
+nav{/*definiendo el aspecto del nav*/
+	background: #387ec5;/*ponme el fondo de tal color*/
+	width: 100%;/*usa todo el ancho de la pagina*/
+	padding-top: 5px;/*usa un margen interior de arriba de 5px*/
+	padding-bottom: 5px;/*usa un margen interior de abajo de 5px*/
 }
 
-input[type="text"]{
+input[type="text"]{/*redefiniedo el aspecto de los input type="text"*/
 	font-family: 'Yanone Kaffeesatz', sans-serif;
 	font-weight: 200;
 	width: 10em;
@@ -94,53 +94,53 @@ input[type="text"]{
 	margin:0;
 	font-size: 18px;
 	color: #555;
-	display: inline-block;
+	display: inline-block;/*le digo al input que se despliegue en linea a las demas cosas, para que todos se muestren en el nav en linea*/
 	margin-left: 0.5em;
 	border-radius: 3px;
 	border: solid 1px #ddd;
 }
 
-.titulob{
+.titulob{/*acpecto del titulo de la pista*/
 	color: #fff;
 	font-size: 20px;
-	display: inline-block;
+	display: inline-block;/*tambien necesito decirle que se va a mostrar en linea*/
+	/*
+	le explico las diferencias:
+	display: block; es una caja, es la configuracion de todo div por ejemplo, block indica que es una caja, y que terminando se da un enter y abajo empieza lo que sea que continue, pero la ventaja de block es que puede manipular paddings y margins
+	display: inline;es una configuracion donde le dice que todo va en linea, osea a diferencia de block, inline va uno despues de otro, y no solo uno en esa linea
+	display: inline-block;permite usar propiedades de las dos anteriores, se muestra en linea pero puedes moverle paddings y margins TANTO A INLINE COMO INLINE-BLOCK, se le pueden agregar propiedades de texto para centrar o alinear
+	*/
 	margin-left: 1em;
 }
 
 #detalles{
-	text-align: center;
+	text-align: center;/*centrame el section detalles, esto lo pongo aqui para que todos los article, se centren porque todos los articles los coloque display:inline-block ;) ese es el truco que le dije arriba*/
 }
 
-#detalles article{
-	width: 31%;
-	display: inline-block;
-	vertical-align: top; 
+#detalles article{/*todos los articulos dentro de detalles*/
+	width: 31%;/*usame nadamas por cada article 31% del ancho total de la pagina, por eso son responsive*/
+	display: inline-block;/*les digo que sean cajas en linea*/
+	vertical-align: top; /*alineo todo verticalmente para arriba*/
 	margin-left: 3px;
 	margin-right: 3px;
-	border-radius: 0 0 4px 4px; 
-	min-height: 150px;
-	background: #6294c6;
+	border-radius: 0 0 4px 4px;/*border redondeados, como nadamas ocupo que se redondeen los dos de abajo, le digo, superior izquierdo 0, superior derecho 0, inferior derecho 4px, inferior izquierdo 4px, en el sentido de las manecillas del reloj*/  
+	min-height: 150px;/*alto minimo 150px*/
+	background: #6294c6;/*fondo de tal color*/
 }
 
-#detalles article .titulo{
-	font-weight: 400;
-	color: #eee;
-	margin-right: 4px;
-	font-size: 20px;
-}
-#detalles article .detalle{
+#detalles article .detalle{/*estilos para el div con la clase detalles que esta dentro del article que esta dentro del section con id detalles*/
 	font-weight: 300;
 	color: #eee;
 	font-size: 20px;
 }
 
 #detalles article .detalle,
-#detalles article .titulo{
+#detalles article .titulo{/*herencia de estilos, en este caso puse #detalles article .titulo, pero despues decidi no usarlo, de cualquier modo asi se usa la herencia de estilos*/
 	display: inline-block;
 	margin-bottom: 5px;
 }
 
-footer{
-	text-align: center;
-	margin: 0 auto;
+footer{/*estilos para el footer*/
+	text-align: center;/*centrame el texto*/
+	margin: 0 auto;/*centrame el contenido*/
 }
